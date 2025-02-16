@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSGXylo - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+        }
+
+        :root {
+            --color-background: #1a1a1a;
+            --color-card: #242424;
+            --color-text: #ffffff;
+            --color-accent: #e0e0e0;
+            --color-accent-glow: #4ecdc4;
+            --color-scrollbar-track: #2c2c2c;
+            --color-scrollbar-thumb: #404040;
+        }
+
+        body {
+            background-color: #0f0f30;  /* Deep navy blue background */
+            overflow-x: hidden;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+
+        .full-wh {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+        }
+        
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .main-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-text {
+            position: relative;
+            background: linear-gradient(135deg, rgba(78,205,196,0.1) 0%, rgba(85,98,212,0.1) 100%);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .header-text::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                rgba(78,205,196,0.2) 0%, 
+                transparent 70%
+            );
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .header-text .typed-text {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .header-text .typed-cursor {
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .header-name-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-text h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+            text-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .header-text .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+            color: #4ecdc4;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .header-text .typed-text {
+            color: #4ecdc4;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-text p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .header-text .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .header-text .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #4ecdc4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .header-text .profile-pic:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .header-text .profile-info {
+            text-align: center;
+        }
+
+        .header-text .username {
+            font-size: 2.5rem;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 3px 10px rgba(78, 205, 196, 0.3);
+        }
+
+        .header-text .tagline {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .header-text .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .header-text .social-icon {
+            color: #4ecdc4;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .header-text .social-icon:hover {
+            color: white;
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: rgba(50, 50, 50, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-left: 2rem;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4CAF50;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #a0a0a0;
+            margin-bottom: 0.5rem;
+        }
+
+        .email {
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-icon {
+            color: var(--color-text);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-icon:hover {
+            color: #ffd700;
+            transform: scale(1.2);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .project-card {
+            background: var(--color-card);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+        }
+
+        .project-card.hidden-initial {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .project-card.animate-on-load {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center, 
+                rgba(78, 205, 196, 0.1), 
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            color: var(--color-accent-glow);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-icon {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--color-accent-glow);
+            transition: width 0.3s ease;
+        }
+
+        .project-card:hover .project-title::after {
+            width: 100%;
+        }
+
+        .project-description {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(78,205,196,0.1);
+            color: var(--color-accent-glow);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            transition: background 0.3s ease;
+        }
+
+        .project-card:hover .tech-tag {
+            background: rgba(78,205,196,0.2);
+        }
+
+        .project-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #4ecdc4;
+            background-color: rgba(78,205,196,0.2);
+            border: 1px solid rgba(78,205,196,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .project-link:hover {
+            background-color: rgba(78,205,196,0.3);
+            transform: scale(1.05);
+        }
+
+        .project-link.coming-soon {
+            background-color: rgba(78,205,196,0.2);
+            color: #4ecdc4;
+            cursor: not-allowed;
+        }
+
+        .section-header, 
+        .contact-section-header {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            perspective: 500px;
+        }
+
+        .section-header h2, 
+        .contact-section-header h2 {
+            display: inline-block;
+            font-size: 2.5rem;
+            color: #ffffff;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            background: linear-gradient(135deg, #4ecdc4, #45b7aa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .section-header h2 .letter, 
+        .contact-section-header h2 .letter {
+            display: inline-block;
+            transform: translateZ(0);
+            transition: all 0.5s ease;
+            margin-right: 0.02rem; /* Minimal spacing */
+        }
+
+        .section-header h2:hover .letter, 
+        .contact-section-header h2:hover .letter {
+            transform: 
+                translateZ(50px) 
+                rotateY(360deg) 
+                scale(1.1);
+            color: #4ecdc4;
+            text-shadow: 0 0 10px rgba(78,205,196,0.5);
+        }
+
+        .section-header h2::before, 
+        .contact-section-header h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #4ecdc4, #45b7aa);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .section-header h2:hover::before, 
+        .contact-section-header h2:hover::before {
+            width: 150px;
+        }
+
+        /* Ensure visibility on dark background */
+        .section-header h2 .letter,
+        .contact-section-header h2 .letter {
+            background: linear-gradient(135deg, #4ecdc4, #45b7aa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .about-me-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--color-card);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .about-me-content {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .about-me-text {
+            flex: 1;
+        }
+
+        .about-me-text p {
+            margin-bottom: 1rem;
+        }
+
+        .personal-interests {
+            margin-top: 2rem;
+        }
+
+        .personal-interests h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .personal-interests ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .personal-interests li {
+            margin-bottom: 0.5rem;
+        }
+
+        .about-me-skills {
+            flex: 1;
+        }
+
+        .about-me-skills h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(78,205,196,0.1);
+            color: var(--color-accent-glow);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .hidden-initial {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .animate-on-load {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .contact-section {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--color-card);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .contact-header {
+            margin-bottom: 1rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            background: rgba(78,205,196,0.1);
+            border-radius: 1rem;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            background: rgba(78,205,196,0.2);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--color-accent-glow);
+        }
+
+        .contact-label {
+            font-weight: bold;
+            color: var(--color-accent-glow);
+        }
+
+        .contact-value {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value:hover {
+            color: var(--color-accent-glow);
+        }
+
+        .ai-chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            background: var(--color-card);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-height: 600px;
+            display: none;
+        }
+
+        .ai-chatbot.open {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            background: rgba(78,205,196,0.2);
+            color: #4ecdc4;
+            padding: 1rem;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            max-height: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chatbot-input-area {
+            display: flex;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(78,205,196,0.1);
+        }
+
+        .chatbot-input {
+            flex-grow: 1;
+            background: rgba(78,205,196,0.1);
+            border: none;
+            padding: 0.75rem;
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .chatbot-send-btn {
+            background: none;
+            border: none;
+            color: #4ecdc4;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-trigger {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4ecdc4;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        .message {
+            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background: rgba(78,205,196,0.2);
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .ai-message {
+            background: rgba(255,255,255,0.1);
+            align-self: flex-start;
+        }
+
+        .message.help-message {
+            background-color: rgba(78,205,196,0.1);
+            border: 1px solid rgba(78,205,196,0.2);
+            font-size: 1rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #0f0f30;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+            transform: rotate(-45deg);
+            animation: shoot 5s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100vw) translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-me-content {
+                flex-direction: column;
+            }
+
+            .about-me-skills {
+                margin-top: 2rem;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-method {
+                width: 100%;
+            }
+        }
+
+        .software-description-container {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .software-description-box {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 800px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .software-description-box:hover {
+            transform: scale(1.02);
+        }
+
+        .software-description-box h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .software-description-box p {
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .software-skills {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category {
+            text-align: center;
+            flex: 1;
+        }
+
+        .skill-category h3 {
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: #3a3a3a;
+            color: #4CAF50;
+            padding: 0.3rem 0.6rem;
+            margin: 0.2rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .mission-statement {
+            font-style: italic;
+            color: #aaa;
+            text-align: center;
+        }
+
+        .games-section {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            background: transparent;
+        }
+
+        .games-section .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0;
+        }
+
+        .game-item {
+            background: transparent;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .game-item:hover {
+            transform: scale(1.05);
+        }
+
+        .games-container {
+            display: flex;
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .games-sidebar {
+            width: 250px;
+            background: rgba(20, 20, 40, 0.7);
+            padding: 2rem 1rem;
+            border-right: 2px solid rgba(76, 205, 196, 0.2);
+        }
+
+        .games-sidebar h3 {
+            color: #4ecdc4;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .game-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .game-item:hover, .game-item.active {
+            background: rgba(76, 205, 196, 0.1);
+            transform: scale(1.05);
+        }
+
+        .game-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .game-item span {
+            color: #4ecdc4;
+            font-weight: 500;
+        }
+
+        .games-main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .game-showcase h3 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .game-showcase p {
+            color: #a0a0a0;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-demo-button {
+            display: inline-block;
+            background-color: #4ecdc4;
+            color: #0f0f30;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-demo-button:hover {
+            background-color: #3aa8a0;
+            transform: scale(1.05);
+        }
+
+        .game-description {
+            background: rgba(20, 20, 40, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .game-description h4 {
+            color: #4ecdc4;
+            margin-bottom: 1rem;
+        }
+
+        .game-description ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .game-description li {
+            color: #a0a0a0;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .game-description li::before {
+            content: "🎮";
+            position: absolute;
+            left: 0;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg" id="cosmicBackground"></div>
+    
+    <div class="main-content">
+        <div class="header-text">
+            <div class="header-name-container">
+                <div class="typed-text-container">
+                    <h1>Hi, I'm <span class="typed-text"></span><span class="typed-cursor">|</span></h1>
+                </div>
+                
+                <div class="profile-section">
+                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+                    
+                    <div class="profile-info">
+                        <div class="username">SSGXylo</div>
+                        <div class="tagline">Code Wizard & Digital Innovator</div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/SSGXylo" target="_blank" title="GitHub" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/yourhandle" target="_blank" title="Twitter" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://discord.com/users/yourid" target="_blank" title="Discord" class="social-icon">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn" class="social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <p>I craft innovative software solutions that push the boundaries of technology, transforming complex challenges into elegant, user-friendly experiences.</p>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>
+                <span class="letter">M</span>
+                <span class="letter">y</span>
+                <span class="letter"> </span>
+                <span class="letter">P</span>
+                <span class="letter">r</span>
+                <span class="letter">o</span>
+                <span class="letter">j</span>
+                <span class="letter">e</span>
+                <span class="letter">c</span>
+                <span class="letter">t</span>
+                <span class="letter">s</span>
+            </h2>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card animate-on-load">
+                <div class="project-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="project-title">The Everything Bot</h3>
+                <p class="project-description">
+                    A multi-purpose AI assistant designed to handle complex tasks, from problem-solving to creative collaboration.
+                </p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">AI</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                </div>
+                <a href="https://github.com/SSGXylo/The-Everything-Bot" class="project-link" target="_blank">Find Out More</a>
+            </div>
+            <div class="project-card animate-on-load">
+                <div class="project-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 class="project-title">Web Portfolio</h3>
+                <p class="project-description">
+                    An interactive, responsive personal website showcasing skills and projects with cutting-edge design.
+                </p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="#" class="project-link" target="_self">View Portfolio</a>
+            </div>
+            <div class="project-card animate-on-load">
+                <div class="project-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="project-title">Game Development</h3>
+                <p class="project-description">
+                    An innovative game prototype exploring unique gameplay mechanics and immersive storytelling techniques.
+                </p>
+                <div class="project-tech-stack">
+                    <span class="tech-tag">Game</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">Block Blast</span>
+                </div>
+                <a href="#" class="project-link coming-soon" target="_self">Coming Out Soon</a>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div class="games-section">
+            <div class="section-header">
+                <h2>
+                    <span class="letter">F</span>
+                    <span class="letter">u</span>
+                    <span class="letter">n</span>
+                    <span class="letter"> </span>
+                    <span class="letter">G</span>
+                    <span class="letter">a</span>
+                    <span class="letter">m</span>
+                    <span class="letter">e</span>
+                    <span class="letter">s</span>
+                </h2>
+            </div>
+
+            <div class="games-container">
+                <div class="games-sidebar">
+                    <h3>My Games</h3>
+                    <div class="game-list">
+                        <div class="game-item active" data-game="rock-paper-scissors">
+                            <img src="assets/game-icons/rps-icon.svg" alt="Rock Paper Scissors">
+                            <span>Rock Paper Scissors</span>
+                        </div>
+                        <div class="game-item" data-game="guess-number">
+                            <img src="assets/game-icons/number-guess-icon.svg" alt="Guess the Number">
+                            <span>Guess the Number</span>
+                        </div>
+                        <div class="game-item" data-game="memory-game">
+                            <img src="assets/game-icons/memory-icon.svg" alt="Memory Game">
+                            <span>Memory Game</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="games-main-content">
+                    <div class="game-showcase">
+                        <h3>Rock Paper Scissors</h3>
+                        <p>Classic game of chance - choose wisely and outsmart your opponent!</p>
+                        
+                        <a href="games/rock-paper-scissors.html" class="game-demo-button">
+                            <span>🎮 Play Rock Paper Scissors</span>
+                        </a>
+
+                        <div class="game-description">
+                            <h4>Game Features</h4>
+                            <ul>
+                                <li>Play against the computer</li>
+                                <li>Real-time result tracking</li>
+                                <li>Simple and fun gameplay</li>
+                                <li>Instant feedback</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <iframe style="display: none; width: 100%; height: 500px; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Me Section -->
+        <div class="about-me-section">
+            <div class="section-header">
+                <h2>
+                    <span class="letter">A</span>
+                    <span class="letter">b</span>
+                    <span class="letter">o</span>
+                    <span class="letter">u</span>
+                    <span class="letter">t</span>
+                    <span class="letter"> </span>
+                    <span class="letter">M</span>
+                    <span class="letter">e</span>
+                </h2>
+            </div>
+            <div class="about-me-content">
+                <div class="about-me-text">
+                    <p>Hey there! I'm Arhaan, a passionate software developer with a love for creating solutions that make a difference. My journey in tech is driven by curiosity, creativity, and a desire to solve real-world problems.</p>
+                    
+                    <p>I specialize in developing versatile software tools and exploring innovative technologies. Whether it's crafting intelligent bots, building responsive web applications, or diving into new programming challenges, I'm always eager to learn and grow.</p>
+                    
+                    <div class="personal-interests">
+                        <h3>What Keeps Me Motivated</h3>
+                        <ul>
+                            <li>• 🚀 Continuous Learning</li>
+                            <li>• 💡 Problem-Solving</li>
+                            <li>• 🤝 Collaborative Development</li>
+                            <li>• 🌐 Open-Source Contribution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="software-description-container">
+                <div class="software-description-box">
+                    <h2>Frontend & Backend</h2>
+                    <p>
+                        As a passionate developer, I transform complex challenges into elegant, 
+                        innovative software solutions. My approach blends cutting-edge technologies 
+                        with creative problem-solving, delivering impactful digital experiences.
+                    </p>
+                    <div class="software-skills">
+                        <div class="skill-category">
+                            <h3>Backend</h3>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C++</span>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Frontend</h3>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <p class="mission-statement">
+                        My mission: Create software that solves real-world problems, 
+                        pushes technological boundaries, and makes a meaningful impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Me Section -->
+        <div class="contact-section">
+            <div class="contact-section-header">
+                <h2>
+                    <span class="letter">C</span>
+                    <span class="letter">o</span>
+                    <span class="letter">n</span>
+                    <span class="letter">t</span>
+                    <span class="letter">a</span>
+                    <span class="letter">c</span>
+                    <span class="letter">t</span>
+                </h2>
+            </div>
+            <div class="contact-content">
+                <p>Have a question or want to collaborate? Feel free to reach out!</p>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:SSGXylo@outlook.com" class="contact-value">SSGXylo@outlook.com</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-github contact-icon"></i>
+                        <span class="contact-label">GitHub</span>
+                        <a href="https://github.com/SSGXylo" target="_blank" class="contact-value">SSGXylo</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-discord contact-icon"></i>
+                        <span class="contact-label">Discord</span>
+                        <a href="https://discord.gg/CcBN6vQDMR" target="_blank" class="contact-value">Join Server</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chatbot -->
+        <button class="chatbot-trigger" id="chatbotTrigger">
+            <i class="fas fa-robot"></i>
+        </button>
+
+        <div class="ai-chatbot" id="aiChatbot">
+            <div class="chatbot-header">
+                <span>AI Assistant</span>
+                <button id="closeChatbot">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages"></div>
+            <div class="chatbot-input-area">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything...">
+                <button class="chatbot-send-btn" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const words = ['SSGXylo', 'a Developer', 'an Innovator', 'a Creator'];
+                const typedTextElement = document.querySelector('.typed-text');
+                const cursorElement = document.querySelector('.typed-cursor');
+                let wordIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+
+                function type() {
+                    const currentWord = words[wordIndex];
+                    
+                    if (isDeleting) {
+                        typedTextElement.textContent = currentWord.substring(0, charIndex - 1);
+                        charIndex--;
+                    } else {
+                        typedTextElement.textContent = currentWord.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+
+                    // Blinking cursor
+                    cursorElement.style.opacity = charIndex % 2 === 0 ? '1' : '0';
+
+                    let typeSpeed = isDeleting ? 50 : 100;
+
+                    if (!isDeleting && charIndex === currentWord.length) {
+                        typeSpeed = 2000;
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                        typeSpeed = 500;
+                    }
+
+                    setTimeout(type, typeSpeed);
+                }
+
+                type();
+            });
+        </script>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatbotTrigger = document.getElementById('chatbotTrigger');
+            const aiChatbot = document.getElementById('aiChatbot');
+            const closeChatbot = document.getElementById('closeChatbot');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotSend = document.getElementById('chatbotSend');
+
+            // Predefined context about Arhaan
+            const CONTEXT = `You are an AI assistant for Arhaan's portfolio. 
+Arhaan is a developer skilled in Python, JavaScript, AI/ML, and Discord Bot development. 
+He created The Everything Bot, a multi-purpose Discord AI assistant. 
+Your goal is to provide helpful and engaging information about Arhaan's projects and skills.`;
+
+            // Conversation history to maintain context
+            let conversationHistory = [
+                { role: 'system', content: CONTEXT }
+            ];
+
+            // Predefined Response Patterns
+            const AIResponses = {
+                patterns: [
+                    { 
+                        keywords: ['hi', 'hello', 'hey'], 
+                        responses: ["Hello! I'm Arhaan's AI assistant. What would you like to know?"]
+                    },
+                    { 
+                        keywords: ['yup', 'yes', 'yeah', 'sure', 'ok'], 
+                        responses: ["Great! Let me tell you about Arhaan's most exciting project - The Everything Bot."]
+                    },
+                    {
+                        keywords: ['project', 'projects', 'everything bot'], 
+                        responses: [
+                            "The Everything Bot is Arhaan's multi-purpose Discord AI assistant.",
+                            "Arhaan developed a sophisticated Discord bot showcasing his AI and programming skills.",
+                            "The Everything Bot demonstrates Arhaan's expertise in Python and AI technologies."
+                        ]
+                    },
+                    {
+                        keywords: ['skills', 'technology', 'tech'], 
+                        responses: [
+                            "Arhaan is skilled in Python, JavaScript, AI/ML, and Web Development.",
+                            "His tech stack includes modern technologies like React, Python, and machine learning frameworks.",
+                            "Arhaan specializes in creating intelligent software solutions."
+                        ]
+                    }
+                ],
+                default: ["I'm bursting with information about Arhaan's projects! What would you like to know?"]
+            };
+
+            // Add message to chat
+            function addMessage(message, type) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', type);
+                messageElement.textContent = message;
+                chatbotMessages.appendChild(messageElement);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+
+            // Generate Response
+            function generateResponse(userMessage) {
+                const lowerMessage = userMessage.toLowerCase();
+
+                // Check for pattern matches
+                for (let pattern of AIResponses.patterns) {
+                    if (pattern.keywords.some(keyword => lowerMessage.includes(keyword))) {
+                        return pattern.responses[Math.floor(Math.random() * pattern.responses.length)];
+                    }
+                }
+
+                // Return default response
+                return AIResponses.default[0];
+            }
+
+            // Initial help message
+            function showInitialHelp() {
+                const helpMessage = `🤖 Arhaan's AI Assistant 🤖
+
+I'm ready to:
+• Discuss Arhaan's Projects
+• Explain Technologies
+• Share Insights
+• Have Intelligent Conversations
+
+Ask me anything!`;
+                addMessage(helpMessage, 'help-message');
+            }
+
+            // Event Listeners
+            chatbotTrigger.addEventListener('click', () => {
+                aiChatbot.classList.add('open');
+                chatbotTrigger.style.display = 'none';
+                chatbotMessages.innerHTML = '';
+                showInitialHelp();
+            });
+
+            closeChatbot.addEventListener('click', () => {
+                aiChatbot.classList.remove('open');
+                chatbotTrigger.style.display = 'flex';
+            });
+
+            chatbotSend.addEventListener('click', () => {
+                const userMessage = chatbotInput.value.trim();
+                if (userMessage) {
+                    addMessage(userMessage, 'user-message');
+                    chatbotInput.value = '';
+
+                    // Generate and add AI response
+                    const aiResponse = generateResponse(userMessage);
+                    addMessage(aiResponse, 'ai-message');
+                }
+            });
+
+            chatbotInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const userMessage = chatbotInput.value.trim();
+                    if (userMessage) {
+                        addMessage(userMessage, 'user-message');
+                        chatbotInput.value = '';
+
+                        // Generate and add AI response
+                        const aiResponse = generateResponse(userMessage);
+                        addMessage(aiResponse, 'ai-message');
+                    }
+                }
+            });
+        });
+        </script>
+
+        <script>
+            // Add game selection functionality
+            const gameItems = document.querySelectorAll('.game-item');
+            const gameIframe = document.querySelector('.games-main-content iframe');
+            gameItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove active class from all items
+                    gameItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    item.classList.add('active');
+
+                    // Update game showcase based on selected game
+                    const gameName = item.getAttribute('data-game');
+                    const gameTitle = item.querySelector('span').textContent;
+                    const gameDescription = {
+                        'rock-paper-scissors': 'Classic game of chance - choose wisely and outsmart your opponent!',
+                        'guess-number': 'Try to guess the secret number in the fewest attempts!',
+                        'memory-game': 'Test your memory by matching pairs of cards!'
+                    }[gameName];
+
+                    // Update game description
+                    document.querySelector('.game-showcase h3').textContent = gameTitle;
+                    document.querySelector('.game-showcase p').textContent = gameDescription;
+
+                    // Load game iframe
+                    gameIframe.src = `games/${gameName}.html`;
+                    gameIframe.style.display = 'block';
+
+                    // Update demo button
+                    const demoButton = document.querySelector('.game-demo-button');
+                    demoButton.href = `games/${gameName}.html`;
+                    demoButton.querySelector('span').textContent = `🎮 Play ${gameTitle}`;
+                });
+            });
+
+            // Default to Rock Paper Scissors
+            gameItems[0].click();
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const gameItems = document.querySelectorAll('.game-item');
+                const gameIframe = document.querySelector('.games-main-content iframe');
+                const gameShowcase = document.querySelector('.game-showcase');
+
+                const gameDetails = {
+                    'rock-paper-scissors': {
+                        title: 'Rock Paper Scissors',
+                        description: 'Classic game of chance - choose wisely and outsmart your opponent!',
+                        link: 'games/rock-paper-scissors.html'
+                    },
+                    'guess-number': {
+                        title: 'Guess the Number',
+                        description: 'Try to guess the secret number in as few attempts as possible!',
+                        link: 'games/guess-number.html'
+                    },
+                    'memory-game': {
+                        title: 'Memory Game',
+                        description: 'Test your memory by matching pairs of emojis!',
+                        link: 'games/memory-game.html'
+                    }
+                };
+
+                gameItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // Remove active class from all items
+                        gameItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Add active class to clicked item
+                        this.classList.add('active');
+
+                        // Get game details
+                        const gameId = this.getAttribute('data-game');
+                        const game = gameDetails[gameId];
+
+                        // Update game showcase
+                        gameShowcase.querySelector('h3').textContent = game.title;
+                        gameShowcase.querySelector('p').textContent = game.description;
+                        gameShowcase.querySelector('.game-demo-button').href = game.link;
+
+                        // Update iframe
+                        gameIframe.src = game.link;
+                        gameIframe.style.display = 'block';
+                    });
+                });
+
+                // Set initial game
+                gameItems[0].click();
+            });
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const cosmicBg = document.getElementById('cosmicBackground');
+
+                // Create stars
+                function createStars(count) {
+                    for (let i = 0; i < count; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        
+                        // Randomize star properties
+                        const size = Math.random() * 3;
+                        star.style.width = `${size}px`;
+                        star.style.height = `${size}px`;
+                        
+                        star.style.left = `${Math.random() * 100}%`;
+                        star.style.top = `${Math.random() * 100}%`;
+                        
+                        // Varied twinkle animation
+                        star.style.animationDuration = `${3 + Math.random() * 5}s`;
+                        star.style.animationDelay = `${Math.random() * 3}s`;
+                        
+                        cosmicBg.appendChild(star);
+                    }
+                }
+
+                // Create shooting stars
+                function createShootingStars(count) {
+                    for (let i = 0; i < count; i++) {
+                        const shootingStar = document.createElement('div');
+                        shootingStar.classList.add('shooting-star');
+                        
+                        // Randomize shooting star properties
+                        shootingStar.style.left = `${Math.random() * 100}%`;
+                        shootingStar.style.top = `${Math.random() * 100}%`;
+                        shootingStar.style.animationDuration = `${5 + Math.random() * 10}s`;
+                        shootingStar.style.animationDelay = `${Math.random() * 5}s`;
+                        
+                        cosmicBg.appendChild(shootingStar);
+                    }
+                }
+
+                // Generate stars and shooting stars
+                createStars(200);  // Adjust number of stars as needed
+                createShootingStars(10);  // Adjust number of shooting stars as needed
+
+                // Optional: Parallax effect
+                window.addEventListener('mousemove', (e) => {
+                    const moveX = (e.clientX - window.innerWidth / 2) * 0.05;
+                    const moveY = (e.clientY - window.innerHeight / 2) * 0.05;
+                    cosmicBg.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+            });
+
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Function to convert section headers to interactive letters
+                function convertHeaderToInteractiveLetters(selector) {
+                    const headers = document.querySelectorAll(selector);
+                    headers.forEach(header => {
+                        const text = header.textContent;
+                        header.innerHTML = text
+                            .split('')
+                            .map(char => `<span class="letter">${char}</span>`)
+                            .join('');
+                    });
+                }
+
+                // Convert headers
+                convertHeaderToInteractiveLetters('.section-header h2');
+                convertHeaderToInteractiveLetters('.contact-section-header h2');
+            });
+        </script>
+    </body>
+</html>

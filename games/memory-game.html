@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0f0f30;
+            color: white;
+            text-align: center;
+        }
+        .game-container {
+            background-color: rgba(30, 30, 50, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .memory-card {
+            width: 100px;
+            height: 100px;
+            background-color: #4ecdc4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+        }
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+        .memory-card .back, .memory-card .front {
+            position: absolute;
+            backface-visibility: hidden;
+        }
+        .memory-card .back {
+            transform: rotateY(180deg);
+        }
+        #status {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Memory Game</h1>
+        <div class="memory-grid" id="memoryGrid"></div>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const emojis = ['🍎', '🍌', '🍇', '🍊', '🍉', '🍋', '🍍', '🥝'];
+        const cards = [...emojis, ...emojis];
+        let flippedCards = [];
+        let matchedPairs = 0;
+
+        function shuffleCards() {
+            return cards.sort(() => Math.random() - 0.5);
+        }
+
+        function createBoard() {
+            const grid = document.getElementById('memoryGrid');
+            const shuffled = shuffleCards();
+            
+            shuffled.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.innerHTML = `
+                    <div class="front">❓</div>
+                    <div class="back">${emoji}</div>
+                `;
+                card.addEventListener('click', () => flipCard(card, emoji));
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(card, emoji) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+                card.classList.add('flipped');
+                flippedCards.push({ card, emoji });
+
+                if (flippedCards.length === 2) {
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const status = document.getElementById('status');
+
+            if (card1.emoji === card2.emoji) {
+                matchedPairs++;
+                status.textContent = 'Match found!';
+                
+                if (matchedPairs === emojis.length) {
+                    status.textContent = 'Congratulations! You won!';
+                }
+            } else {
+                card1.card.classList.remove('flipped');
+                card2.card.classList.remove('flipped');
+                status.textContent = 'No match. Try again!';
+            }
+
+            flippedCards = [];
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
